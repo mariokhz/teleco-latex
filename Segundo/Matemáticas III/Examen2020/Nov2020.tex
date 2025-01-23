@@ -1,0 +1,103 @@
+\documentclass{article}
+\usepackage[main=spanish, provide=*]{babel}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usepackage{pgfplots}
+\usepackage{darkmode}
+\usepackage{amsmath,amssymb}
+\usepackage[a4paper, top=2cm, bottom=2cm]{geometry}
+\usepgfplotslibrary{patchplots}
+
+\enabledarkmode
+
+\definecolor{c1}{HTML}{8bb6e7}
+\definecolor{c2}{HTML}{87f3dd}
+\definecolor{c3}{HTML}{fdef83}
+\definecolor{c4}{HTML}{fdc373}
+\definecolor{c5}{HTML}{fd8581}
+\definecolor{c6}{HTML}{c573e7}
+\definecolor{c7}{HTML}{afdb68}
+\definecolor{c8}{HTML}{e59f8b}
+
+\definecolor{page}{HTML}{262626}
+\pagecolor{page}
+
+\begin{document}
+\title{Primer Parcial Matemáticas III}
+\author{Mario López Sáez}
+\date{Noviembre de 2020}
+\maketitle
+
+\begin{center}
+\begin{tikzpicture}
+    \fill[c1] (0, 0) rectangle ++(1, 0.05);
+    \fill[c2] (1, 0) rectangle ++(1, 0.05);
+    \fill[c3] (2, 0) rectangle ++(1, 0.05);
+    \fill[c4] (3, 0) rectangle ++(1, 0.05);
+    \fill[c5] (4, 0) rectangle ++(1, 0.05);
+    \fill[c6] (5, 0) rectangle ++(1, 0.05);
+    \fill[c7] (6, 0) rectangle ++(1, 0.05);
+    \fill[c8] (7, 0) rectangle ++(1, 0.05);
+\end{tikzpicture}
+
+\end{center}
+\section*{Problema I.} Se consideran tres números reales A, B y C y la función $f:\mathbb{R} \to \mathbb{R}$ dada por:
+$$
+f(x)={\left\{\begin{array}{l l}{A,}&{x=-3}\\ {0,}&{-3<x<0}\\ {B,}&{x=0}\\ {8x,}&{0<x<3}\\ {C,}&{x=3}\end{array}\right.},\quad f(x+6)=f(x){\mathrm{~en~el~resto}}.
+$$
+\begin{flushleft}
+\textbf{a) (2.5p)} Calcular los coeficientes de la serie de Fourier de f y escribir dicha serie.
+\end{flushleft}			
+$$
+f(x)\sim\frac{a_{0}}{2}+\sum_{n=1}^{\infty}a_{n}\cos\left(\frac{n\pi}{L}x\right)+b_{n}\sin\left(\frac{n\pi}{L}x\right)
+$$
+$$
+a_{n} = \frac{1}{L} \int_{-L}^L f(x) \cos (\frac{n \pi}{L}x) dx, \ n = 0,1,2,...
+$$
+$$
+b_{n} = \frac{1}{L} \int_{-L}^L f(x) \sin (\frac{n \pi}{L}x) dx, \ n = 1,2,...
+$$
+\hrule 
+\vspace{0.3cm}
+$$
+a_{0} = \frac{1}{3} \int_{-3}^3 f(x)dx = \frac{1}{3} \int_{0}^{3} 8x \ dx = \frac{1}{3} \frac{8 \cdot 3^2}{2} = 12
+$$
+
+$$
+a_{n} = \frac{1}{3} \int_{-3}^{3} f(x) \cos (\frac{n \pi}{3}x)dx = \frac{1}{3} \int_{0}^{3} 8x \cdot \cos (\frac{n \pi}{3}x) dx = \frac{24 \cdot [\cos(n \pi) - 1]}{n^{2}\pi^2} = \frac{24 \cdot [(-1)^n - 1]}{n^{2} \pi^2}
+$$
+$$
+b_{n} = \frac{1}{3} \int_{0}^{3} 8x \sin (\frac{n \pi}{3}x) dx = \frac{-8x \cdot \cos (\frac{n \pi}{3}x)}{n \pi} \Bigg|_0^3 = \frac{24 (-1)^{n+1}}{n \pi}
+$$
+
+$$
+f(x) \approx 6 + \sum_{n=1}^\infty \frac{24 \cdot [(-1)^n - 1]}{n^{2} \pi^2} \cos\left(\frac{n \pi x}{3}\right) + \frac{24 (-1)^{n+1}}{n \pi} \sin\left(\frac{n \pi x}{3}\right)
+$$
+
+\begin{center}
+	\begin{tikzpicture}
+	  	\begin{axis}[
+		height=5cm,
+		width=\textwidth,
+		grid=both,
+		domain=-3:3,
+		major grid style={line width=.2pt,draw=gray!95},
+		every axis/.append style={axis line style={gray!80}, tick style={gray!80}}
+		]
+		\addplot[c1!150, smooth, ultra thick] table {datos100.dat};
+		\addplot[c1, smooth, ultra thick] table {datos8.dat};
+		\addplot[c1!30, domain=0:3, ultra thick, dotted] {8*x};
+		\addplot[c1!30, domain=-3:0, ultra thick, dotted] {0};
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
+
+\begin{flushleft}
+\textbf{b) (1p)} Encontrar los valores de A, B y C para que la serie de Fourier de f converja puntualmente a f(x) para todo $x \in \mathbb{R}$. Justificar todas las afirmaciones.
+\end{flushleft}
+
+
+\end{document}

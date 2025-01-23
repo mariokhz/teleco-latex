@@ -1,0 +1,203 @@
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usepackage{pgfplots}
+\usepackage{darkmode}
+\usepackage{amsmath}
+\usepackage[a4paper, top=2cm, bottom=2cm]{geometry}
+
+\enabledarkmode
+
+\definecolor{c1}{HTML}{46C2CB}
+\definecolor{c2}{HTML}{f4895f}
+\definecolor{c3}{HTML}{EB3678}
+\definecolor{c4}{HTML}{FB773C}
+
+\definecolor{page}{HTML}{262626}
+\pagecolor{page}
+
+\begin{document}
+\title{Tareas Previas P2}
+\author{Mario López Sáez}
+\date{\today}
+\maketitle
+
+\hspace*{2.2cm} \begin{circuitikz}[american, cute inductors]
+	\draw (0,0) to[open, o-] ++(0, 0) to[C] ++(2, 0) to[R=$R_1$] ++(0, 4) to[short, -*] ++(4, 0) coordinate(VCC);
+	\draw (2, -4) to[R=$R_2$] ++(0, 4);
+	\draw (4, 0) node[npn, anchor=B](Q1) {Q1} to[short] (2, 0);
+	\draw (Q1.C) to[R=$R_C$] ++(0, 3.22);
+	\draw (Q1.E) ++(0, -3.22) coordinate(tmp) to[R=$R_E$] (Q1.E);
+	\draw (2, -4) to[short] (tmp);
+	\coordinate (mid) at ($(2, -4)!.5!(tmp)$);
+	\draw (mid) node[ground]{};
+	\coordinate (aux) at (VCC |- Q1.C); % Esto toma la coordenada x de VCC y la y de Q1.C
+	\draw (Q1.C) to[short, -*] (aux); % Dibuja algo desde esa coordenada
+	\draw (aux) node[right] {$v_o$};
+	\draw (VCC) node[right] {$+V_{CC}$};
+	\draw (0, 0) node[left] {$v_i$};
+
+
+
+\end{circuitikz}
+
+\begin{center}
+	Datos: $V_{CC} = 8 V$, $R_1 = 8.2 k\Omega$, $R_2 = 2.2 k\Omega$, $R_E = 1 k\Omega$, $R_C = 2.7 k\Omega$, $\beta = 300$, $V_{BE} = 0.6 V$
+\end{center}
+
+
+\newpage
+
+\section{Cálculo de punto Q}
+Calculamos el punto Q del circuito
+\begin{flalign*}
+    &V_{B} = V_{CC} \cdot \frac{R_{2}}{R_{1}+R_{2}} = 1.692 \, \text{V} \\
+    &V_{E} = V_{B} - V_{BE} = 1.092 \, \text{V} \\
+    &I_E = 1.092 \, \text{mA} \approx I_C \\
+    &V_{C} = V_{CC} - I_{C} \cdot R_{C} = 5.05 \, \text{V} \\
+    &V_{CE} = 3.96 \, \text{V} \\
+    \\
+\end{flalign*}
+
+\section{Cálculo de la recta dinámica}
+
+
+\begin{flushleft}
+    \text{Recta de carga dinámica: } $i_C - I_{CQ} = m_d (v_{CE} - V_{CEQ})$ \\
+    \text{Pendiente de la carga dinámica: } $m_d = - \frac{1}{R_{CA}}$
+\end{flushleft}
+
+
+\begin{circuitikz}[american]
+    \coordinate (start) at (0, 0);
+    \draw(start) to[short] (5, 0);
+    \draw (5, 0) node[npn, anchor=B](Q1) {Q1};
+    \draw (2, -3) node[ground](G1) {};
+    \draw (2, 0) to[R=$R_1$] (G1);
+    \draw (4, -3) node[ground](G2) {};
+    \draw (4, 0) to[R=$R_2$] (G2);
+    \draw (0, -3) node[ground](G3) {};
+    \draw (start) to[vsourcesin,v=$v_{in}$] (G3);
+    \draw (Q1.E) to[R=$R_E$] ++(0, -2.2) coordinate(RE);
+    \draw (RE) node[ground]{};
+    \draw (Q1.C) to[short] ++(2,0) coordinate(RC) to[short] ++(2,0) to[open, o-] ++(0,0) node[right] {$v_o$};
+    \draw (RC) ++(0, -3.7) to[R=$R_C$] (RC);
+    \draw (RC) ++(0, -3.7) node[ground]{};
+\end{circuitikz}
+
+\begin{flushleft}
+	$m_d = - \frac{1}{R_C+R_E} = -0.270 \ \text{mA/V}$ \\ 
+	$i_C - 1.092 = -0.27 (v_{CE} - 5.05)$ \\
+	$v_{ce_{max}} = 2.455/0.27 = 9.0555 \ V$
+\end{flushleft}
+
+\begin{center}
+	$i_C = 2.455 -0.27v_{CE}$
+
+\end{center}
+\begin{center}
+	\begin{tikzpicture}
+		\coordinate (start) at (0,0);
+	
+		\draw[->] (start) -- (0, 5.5) node[right] {$i_c (mA)$}; 
+		\draw[->] (start) -- (6, 0) node[right] {$V_{CE}(V)$};
+		\coordinate (icmax) at (0, 4.91);
+		\coordinate (icq) at (0, 2.184);
+		\draw[c2] (icmax) -- (9.0555/2, 0) node[below] {9.06};
+		\coordinate (vceq) at (3.96/2, 0);
+		\draw[c2] (icmax) node[left] {$ic_{max}=2.455$};
+		\coordinate (mid) at (vceq |- icq);
+		\fill[c2] (mid) circle (2pt) node[right] {$Q(3.96, 1.09)$};
+		\coordinate (midx) at (vceq |- start);
+		\coordinate (midy) at (start |- icq);
+
+		\draw[dashed] (midx) -- (mid);
+		\draw[dashed] (midy) -- (mid);
+		\draw (icq) node[left] {1.09};
+		\draw (vceq) node[below] {3.96};
+
+
+\end{tikzpicture}
+
+\end{center}
+
+\hspace*{2.2cm} \begin{circuitikz}[american, cute inductors]
+	\draw (0,0) to[open, o-] ++(0, 0) to[C] ++(2, 0) to[R=$R_1$] ++(0, 4) to[short, -*] ++(4, 0) coordinate(VCC);
+	\draw (2, -4) to[R=$R_2$] ++(0, 4);
+	\draw (4, 0) node[npn, anchor=B](Q1) {Q1} to[short] (2, 0);
+	\draw (Q1.C) to[R=$R_C$] ++(0, 3.22);
+	\draw (Q1.E) ++(0, -3.22) coordinate(tmp) to[R=$R_E$] (Q1.E);
+	\draw (2, -4) to[short] (tmp);
+	\draw[c1] (Q1.E) to[short] ++(1, 0) to[C] ++(0, -3) to[short] ++(-1, 0);
+	\coordinate (mid) at ($(2, -4)!.5!(tmp)$);
+	\draw (mid) node[ground]{};
+	\coordinate (aux) at (VCC |- Q1.C); % Esto toma la coordenada x de VCC y la y de Q1.C
+	\draw (Q1.C) to[short, -*] (aux); % Dibuja algo desde esa coordenada
+	\draw (aux) node[right] {$v_o$};
+	\draw (VCC) node[right] {$+V_{CC}$};
+	\draw (0, 0) node[left] {$v_i$};
+
+
+
+\end{circuitikz}
+
+Lo analizamos en CA:
+
+\begin{circuitikz}[american]
+    \coordinate (start) at (0, 0);
+    \draw(start) to[short] (5, 0);
+    \draw (5, 0) node[npn, anchor=B](Q1) {Q1};
+    \draw (2, -3) node[ground](G1) {};
+    \draw (2, 0) to[R=$R_1$] (G1);
+    \draw (4, -3) node[ground](G2) {};
+    \draw (4, 0) to[R=$R_2$] (G2);
+    \draw (0, -3) node[ground](G3) {};
+    \draw (start) to[vsourcesin,v=$v_{in}$] (G3);
+    \draw[c1] (Q1.E) to[short] ++(0, -2.2) coordinate(RE);
+    \draw[c1] (RE) node[ground]{};
+    \draw (Q1.C) to[short] ++(2,0) coordinate(RC) to[short] ++(2,0) to[open, o-] ++(0,0) node[right] {$v_o$};
+    \draw (RC) ++(0, -3.7) to[R=$R_C$] (RC);
+    \draw (RC) ++(0, -3.7) node[ground]{};
+\end{circuitikz}
+
+\begin{flushleft}
+    $m_d = - \frac{1}{R_{C}} = 0.370$ \\
+    $i_C - 1.09 = -0.37 (v_{CE} - 5.05)$ \\
+    $v_{ce_{max}} = 2.468/0.37 = 6.6702 \ V$
+\end{flushleft}
+
+\begin{center}
+	$i_C = 2.468 -0.37v_{CE}$
+
+\end{center}
+
+\begin{center}
+	\begin{tikzpicture}
+		\coordinate (start) at (0,0);
+	
+		\draw[->] (start) -- (0, 6.5) node[right] {$i_c (mA)$}; 
+		\draw[->] (start) -- (6.5, 0) node[right] {$V_{CE}(V)$};
+		\coordinate (icmax) at (0, 2.959*2);
+		\coordinate (icq) at (0, 1.09*2);
+		\draw[c1] (icmax) -- (10.96/2, 0) node[below] {6.67};
+		\coordinate (vceq) at (5.05/2, 0);
+		\draw (4, -0.2) node[] {8};
+		\draw (icmax) node[left] {$ic_{max}=2.595$};
+		\coordinate (mid) at (vceq |- icq);
+		\fill[c2] (mid) circle (2pt) node[right] {$Q(6.67, 0.36)$};
+		\coordinate (midx) at (vceq |- start);
+		\coordinate (midy) at (start |- icq);
+
+		\draw[dashed] (midx) -- (mid);
+		\draw[dashed] (midy) -- (mid);
+		\draw (icq) node[left] {0.36};
+
+\end{tikzpicture}
+
+\end{center}
+
+
+
+\end{document}
