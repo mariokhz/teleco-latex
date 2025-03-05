@@ -1,0 +1,537 @@
+\documentclass{article}
+\usepackage[main=spanish, provide=*]{babel}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{keyval}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{listings}
+\usepackage{darkmode}
+\usepackage{svg}
+\usepackage{amsmath}
+\usepackage[a4paper, top=2cm, bottom=2cm]{geometry}
+
+
+\newcommand{\iconpath}{/home/khz/git/tabler-icons/icons/outline-white/}
+\newcommand{\icon}[1]{\includesvg[width=0.75em]{\iconpath#1}}
+
+\enabledarkmode
+\renewcommand{\rmdefault}{cmss}
+
+
+\definecolor{c1}{HTML}{8bb6e7}
+\definecolor{c2}{HTML}{87f3dd}
+\definecolor{c3}{HTML}{fdef83}
+\definecolor{c4}{HTML}{fdc373}
+\definecolor{c5}{HTML}{fd8581}
+\definecolor{c6}{HTML}{c573e7}
+\definecolor{c7}{HTML}{afdb68}
+\definecolor{c8}{HTML}{e59f8b}
+
+\definecolor{page}{HTML}{262626}
+\pagecolor{page}
+
+\setlength{\headwidth}{\textwidth} 
+\fancyfoot[C]{\icon{logic-and} \icon{logic-nand} \icon{logic-buffer} \icon{logic-not} \icon{logic-or} \icon{logic-xor} \icon{logic-xnor} \icon{logic-and} \icon{logic-nand} \icon{logic-buffer} \icon{logic-not} \icon{logic-or} \icon{logic-xor} \icon{logic-xnor} \icon{logic-and} \icon{logic-nand} \icon{logic-buffer} \icon{logic-not} \icon{logic-or} \icon{logic-xor} \icon{logic-xnor} \icon{logic-and} \icon{logic-nand} \icon{logic-buffer} \icon{logic-not} \icon{logic-or} \icon{logic-and} \icon{logic-nand} \icon{logic-buffer} \icon{logic-not} \icon{logic-or} \icon{logic-xor} \icon{logic-xnor} \icon{logic-and} \icon{logic-or} \icon{logic-and} \icon{logic-nand} \icon{logic-buffer} \icon{logic-not} 
+}
+
+% Estilo para Python
+\lstdefinestyle{python}{
+    language=Python,
+    backgroundcolor=\color{page!110},
+    basicstyle=\ttfamily\footnotesize,  % Fuente predeterminada (Computer Modern)
+    keywordstyle=\color{c1}\bfseries,
+    commentstyle=\color{c2},
+    stringstyle=\color{c3},
+    identifierstyle=\color{c4},
+    procnamekeys={def,class},
+    showstringspaces=false,
+    breaklines=true,
+    breakatwhitespace=true,
+    frame=single
+}
+
+% Estilo para Verilog
+\lstdefinestyle{verilog}{
+    language=Verilog,
+    backgroundcolor=\color{page!110},
+    basicstyle=\ttfamily\footnotesize,  % Fuente predeterminada (Computer Modern)
+    keywordstyle=\color{c3}\bfseries,
+    commentstyle=\color{c2},
+    stringstyle=\color{c1},
+    identifierstyle=\color{c5},
+    showstringspaces=false,
+    breaklines=true,
+    breakatwhitespace=true,
+    frame=single
+}
+
+
+\begin{document}
+\title{Proyecto 1: Juego de luces}
+\author{Mario López Sáez}
+\date{\today}
+\maketitle
+
+\begin{center}
+\begin{tikzpicture}
+    \fill[c1] (0, 0) rectangle ++(1, 0.05);
+    \fill[c2] (1, 0) rectangle ++(1, 0.05);
+    \fill[c3] (2, 0) rectangle ++(1, 0.05);
+    \fill[c4] (3, 0) rectangle ++(1, 0.05);
+    \fill[c5] (4, 0) rectangle ++(1, 0.05);
+    \fill[c6] (5, 0) rectangle ++(1, 0.05);
+    \fill[c7] (6, 0) rectangle ++(1, 0.05);
+    \fill[c8] (7, 0) rectangle ++(1, 0.05);
+\end{tikzpicture}
+
+\end{center}
+
+\vspace{0.8cm}
+
+\begin{center}
+    
+\begin{tikzpicture}
+  \fill [c2] (7, 0) rectangle ++(1,1);
+  \foreach \i in {0,...,7}{
+    \draw (\i,0) rectangle ++(1,1);
+  }
+\end{tikzpicture}
+
+\end{center}
+
+
+\begin{center}
+    
+\begin{tikzpicture}
+  \fill [c2] (6, 0) rectangle ++(1,1);
+  \foreach \i in {0,...,7}{
+    \draw (\i,0) rectangle ++(1,1);
+  }
+\end{tikzpicture}
+
+\end{center}
+
+\begin{center}
+    
+\begin{tikzpicture}
+  \fill [c2] (5, 0) rectangle ++(1,1);
+  \foreach \i in {0,...,7}{
+    \draw (\i,0) rectangle ++(1,1);
+  }
+\end{tikzpicture}
+
+\end{center}
+
+\begin{center}
+    
+\begin{tikzpicture}
+  \fill [c2] (4, 0) rectangle ++(1,1);
+  \foreach \i in {0,...,7}{
+    \draw (\i,0) rectangle ++(1,1);
+  }
+\end{tikzpicture}
+
+\end{center}
+
+\begin{center}
+    
+\begin{tikzpicture}
+  \fill [c2] (3, 0) rectangle ++(1,1);
+  \foreach \i in {0,...,7}{
+    \draw (\i,0) rectangle ++(1,1);
+  }
+\end{tikzpicture}
+
+\end{center}
+\begin{center}
+    
+\begin{tikzpicture}
+  \fill [c2] (2, 0) rectangle ++(1,1);
+  \foreach \i in {0,...,7}{
+    \draw (\i,0) rectangle ++(1,1);
+  }
+\end{tikzpicture}
+
+\end{center}
+\begin{center}
+    
+\begin{tikzpicture}
+  \fill [c2] (1, 0) rectangle ++(1,1);
+  \foreach \i in {0,...,7}{
+    \draw (\i,0) rectangle ++(1,1);
+  }
+\end{tikzpicture}
+
+\end{center}
+\begin{center}
+    
+\begin{tikzpicture}
+  \fill [c2] (0, 0) rectangle ++(1,1);
+  \foreach \i in {0,...,7}{
+    \draw (\i,0) rectangle ++(1,1);
+  }
+\end{tikzpicture}
+
+\end{center}
+\begin{center}
+    
+\begin{tikzpicture}
+  \fill [c2] (1, 0) rectangle ++(1,1);
+  \foreach \i in {0,...,7}{
+    \draw (\i,0) rectangle ++(1,1);
+  }
+\end{tikzpicture}
+
+\end{center}
+\begin{center}
+    
+\begin{tikzpicture}
+  \fill [c2] (2, 0) rectangle ++(1,1);
+  \foreach \i in {0,...,7}{
+    \draw (\i,0) rectangle ++(1,1);
+  }
+\end{tikzpicture}
+
+\end{center}
+\begin{center}
+    
+\begin{tikzpicture}
+  \fill [c2] (3, 0) rectangle ++(1,1);
+  \foreach \i in {0,...,7}{
+    \draw (\i,0) rectangle ++(1,1);
+  }
+\end{tikzpicture}
+
+\end{center}
+\begin{center}
+    
+\begin{tikzpicture}
+  \fill [c2] (4, 0) rectangle ++(1,1);
+  \foreach \i in {0,...,7}{
+    \draw (\i,0) rectangle ++(1,1);
+  }
+\end{tikzpicture}
+
+\end{center}
+\begin{center}
+    
+\begin{tikzpicture}
+  \fill [c2] (5, 0) rectangle ++(1,1);
+  \foreach \i in {0,...,7}{
+    \draw (\i,0) rectangle ++(1,1);
+  }
+\end{tikzpicture}
+
+\end{center}
+\begin{center}
+    
+\begin{tikzpicture}
+  \fill [c2] (6, 0) rectangle ++(1,1);
+  \foreach \i in {0,...,7}{
+    \draw (\i,0) rectangle ++(1,1);
+  }
+\end{tikzpicture}
+
+\end{center}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Introducción}
+\begin{flushleft}
+    
+El objetivo principal del proyecto es crear un juego de luces en el que la luz viaje del LEDG[0]
+al LEDG[7], y rebote de nuevo hacia el LEDG[1] (no cuento el 0 ya que es volver al primer estado ya definido). \\
+
+Contamos con un reloj de 50 MHz, y será vital recordar el valor para poder controlar la velocidad del juego de luces.
+
+\end{flushleft}
+
+% \begin{center}
+%   \begin{circuitikz} 
+%     \draw (1, 0) rectangle ++(2,4) coordinate(c_end);
+%   \draw (0, 3) node[left] {CLK} -- ++(1, 0) node[isosceles triangle, fill, scale=0.5, right] {};
+%   \draw (0, 1) node[left] {ENABLE} -- ++(1, 0);
+% \draw (0, 2) node[left] {RSTn} -- ++(1, 0) node[notcirc, left] {};
+% \end{circuitikz}
+% \end{center}
+
+\section{Contador parametrizable}
+\subsection{Parámetros}
+\begin{flushleft}
+\textbf{Parámetro: módulo (modulus).} \\
+Número de cuentas (0 a modulus-1) \\
+\end{flushleft}
+\begin{flushleft}
+\textbf{Parámetro local: n} \\
+Número de bits para contar hasta modulus-1. \\
+n se puede calcular fácilmente mediante dos funciones \\
+    
+\end{flushleft}
+Sabemos que el mayor módulo posible con n bits es $2^n$, por lo que $n = \log_2 (\text{modulus})$, pero, n debe ser un natural, por lo que va a haber que aproximar nuestra función. Con un par de cálculos sencillos nos podemos dar cuenta de que hay que aproximar al alza. \\
+
+\begin{flushleft}
+Esto significa, que si n = 3.14 habrá que guardar n = 4. Esta función se llama ceil, y es el opuesto de floor, truncar (techo - suelo respectivamente en inglés) \\
+\end{flushleft}
+Estos ejemplos en Python y en Verilog son lo mismo:
+
+\begin{lstlisting}[style=python]
+# Python
+>> import numpy as np 
+>> n = np.ceil(np.log2(9))
+----------------------------
+4.0
+\end{lstlisting}
+
+\begin{lstlisting}[style=verilog]
+// Verilog
+localparam n = $clog2(9);
+\end{lstlisting}
+
+\subsection{Entradas}
+\icon{clock} \icon{s-turn-up} CLK | Señal de reloj a 50 MHz \\
+\icon{clock} \icon{s-turn-up} UP | Entrada síncrona. A nivel alto el contador va hacia arriba y viceversa \\
+\icon{clock} \icon{s-turn-up} ENABLE | Entrada síncrona a nivel alto \\
+\icon{clock-off} \icon{s-turn-down} RSTn | Reset asíncrono a nivel bajo \\
+
+\subsection{Salidas}
+\icon{clock} \icon{arrow-right} \icon{matrix} COUNT [n-1:0] | Registro que guarda la cuenta \\
+\icon{clock-off} \icon{arrow-right} \icon{s-turn-up} TC | Toggle counter - salida que se activa cuando la cuenta llega al final
+
+\subsection{Notas sobre el código}
+\begin{flushleft}
+\textbf{Always} at \icon{s-turn-up} \icon{clock} or \icon{s-turn-down} RSTn \\
+Bloque sencillo, con bloques condicionales. \\
+\end{flushleft}
+\textbf{Assign} \\
+Operador ternario: 
+\begin{lstlisting}[style=verilog]
+assign OUTPUT = CONDICION ? VALOR_SI_TRUE : VALOR_SI_FALSE;
+assign TC = ((UP && (COUNT == modulus-1)) || (~UP && ((COUNT == 0) && RSTn))) && (ENABLE) ? 1 : 0;
+\end{lstlisting}
+A la condición final le añadimos AND ENABLE y AND RSTn para que TC no se pueda quedar pillado.
+El efecto de AND RSTn es igualmente aplicable a la condición final, o como en mi código, a solo el caso en el que UP = 0. Si UP = 1, TC no se activaría nunca con RSTn = 0, ya que con UP = 1 miramos COUNT == modulus-1.
+
+
+\newpage
+
+\section{Pruebas: Contador parametrizable}
+Al estar utilizando el contador como divisor de frecuencia, comprobar que TC no se queda activo durante un largo periodo de tiempo es vital, ya que, si no, nuestro registro de desplazamiento funcionaría a la velocidad del reloj, y los LEDs irían muy rápido.
+\subsection{Parámetros}
+\begin{flushleft}
+\textbf{Escala de tiempo} \\
+1 ns - Unidad por defecto \\
+100 ps - Precisión de la simulación \\
+\end{flushleft}
+\textbf{Parámetro local: T = 20 ns} \\
+\textbf{Módulo: 20}
+\subsection{Funcionamiento normal}
+Comprobaremos que el contador de manera natural funciona como debe.
+\begin{lstlisting}[style=verilog]
+CLK = 0;
+UP = 1;
+RSTn = 0;
+ENABLE = 0;
+#(T*2)
+RSTn = 1;
+#(T*2)
+ENABLE = 1;
+#(T*19)
+UP = 0;                // Pequeno juego con UP para ver como se comporta TC
+#(T/2)
+UP = 1;
+#(T*2)
+UP = 0;
+#(T*14)
+UP = 0;
+ENABLE = 0;
+#(T*4)
+ENABLE = 1;
+\end{lstlisting}
+\textbf{Simulación}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{counter_rtl_fig1.png} 
+    \caption{Simulación RTL. Funcionamiento normal del contador}
+\end{figure}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{counter_gate_fig1.png} 
+    \caption{Simulación Gate-Level.}
+    \label{fig:ejemplo}
+\end{figure}
+
+\newpage
+
+\subsection{Caso extremo 1: Con RSTn y UP = 0, ¿se queda TC pillado?}
+\begin{lstlisting}[style=verilog]
+// RSTn con UP = 0 genera un TC prolongado?
+UP = 0;
+RSTn = 0;
+#(T*2)
+RSTn = 1;
+#(T*4)
+UP = 1;
+#(T*2)
+\end{lstlisting}
+\textbf{Simulación} 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{counter_rtl_fig2.png} 
+    \caption{Simulación RTL. Caso extremo 1.}
+\end{figure}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{counter_gate_fig2.png} 
+    \caption{Simulación Gate-Level. TC se activa un ciclo mínimo frente a la delta de RTL}
+\end{figure}
+\subsection{Caso extremo 2: Apagamos ENABLE cuando TC = 1}
+\begin{lstlisting}[style=verilog]
+// ¿ENABLE = 0 cuando TC = 1 deja TC pillado en 1?
+wait (duv.TC == 1);
+ENABLE = 0;
+#(T*4)
+ENABLE = 1;
+// Lo mismo pero con UP = 0
+UP = 0;
+#(T*8)
+wait (duv.TC == 1);
+ENABLE = 0;
+#(T*4)
+$display("Test finished");
+$stop;
+end
+\end{lstlisting}
+\newpage
+\begin{flushleft}
+\textbf{Simulación}
+\end{flushleft}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{counter_rtl_fig3.png} 
+    \caption{Simulación RTL. Caso extremo 2}
+\end{figure}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{counter_gate_fig3.png} 
+    \caption{Simulación Gate-Level.}
+\end{figure}
+\subsection{Vista general}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{counter_rtl_gen.png} 
+    \caption{Simulación RTL. Vista general}
+\end{figure}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{counter_gate_gen.png} 
+    \caption{Simulación Gate-Level. Vista general}
+\end{figure}
+
+\newpage
+\section{Registro de desplazamiento parametrizable}
+\subsection{Parámetros}
+\textbf{Parámetro: ancho} \\
+El tamaño de bits del registro.
+
+\subsection{Entradas}
+\icon{clock} \icon{s-turn-up} CLK | Señal de reloj a 50 MHz \\
+\icon{clock} \icon{s-turn-up} ENABLE | Entrada síncrona a nivel alto \\
+\icon{clock} \icon{wave-square} SHIFT-IN | Entrada de serie \\
+\icon{clock-off} \icon{s-turn-down} RSTn | Reset asíncrono a nivel bajo \\
+\subsection{Salidas}
+\icon{clock} \icon{arrow-right} \icon{matrix} OUT-P [ancho-1:0] | Salida en paralelo \\
+\icon{clock-off} \icon{arrow-right} \icon{wave-square} SHIFT-OUT | Salida de serie
+\subsection{Notas sobre el código}
+\textbf{Always} at \icon{s-turn-up} \icon{clock} or \icon{s-turn-down} RSTn \\
+Concatenación de señales. Ponemos a la izquierda la entrada SHIFT-IN y a la derecha OUT-P sin incluir OUT-P[0] para mantener el mismo tamaño.
+\begin{lstlisting}[style=verilog]
+OUT_P[ancho-1:0] <= {SHIFT_IN, OUT_P[ancho-1:1]};
+\end{lstlisting} 
+\begin{flushleft}
+\textbf{Assign} \\
+Asignamos OUT-P[0] a SHIFT-OUT
+\end{flushleft}
+\section{Pruebas: Registro parametrizable}
+\subsection{Parámetros}
+\begin{flushleft}
+Escala de tiempo \\
+1 ns - Unidad por defecto
+100 ps - Precisión de la simulación
+\end{flushleft}
+\textbf{Parámetro local: T = 20 ns} \\
+\textbf{Ancho: 7}
+
+\subsection{Simulación RTL}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{shift_rtl_fig1.png} 
+\end{figure}
+\subsection{Simulación Gate-Level}
+
+\newpage
+\section{Juego de luces}
+\subsection{Parámetros}
+\begin{table}[h]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Estado & Johnson & LEDG \\
+        \hline
+        1  & 0000000 & 00000001 \\
+        2  & \textcolor{c1}{1}000000 & 00000010 \\
+        3  & \textcolor{c1}{11}00000 & 00000100 \\
+        4  & \textcolor{c1}{111}0000 & 00001000 \\
+        5  & \textcolor{c1}{1111}000 & 00010000 \\
+        6  & \textcolor{c1}{11111}00 & 00100000 \\
+        7  & \textcolor{c1}{111111}0 & 01000000 \\
+        8  & \textcolor{c1}{1111111} & 10000000 \\
+        9  & 0\textcolor{c1}{111111} & 01000000 \\
+        10  & 00\textcolor{c1}{11111} & 00100000 \\
+        11 & 000\textcolor{c1}{1111} & 00010000 \\
+        12 & 0000\textcolor{c1}{111} & 00001000 \\
+        13 & 00000\textcolor{c1}{11} & 00000100 \\
+        14 & 000000\textcolor{c1}{1}& 00000010 \\
+        \hline
+    \end{tabular}
+    \caption{$2 \cdot 7 = 14 \to 7 \ bits$}
+    \label{tab:contador_johnson}
+\end{table}
+\subsection{Entradas}
+\icon{clock} \icon{s-turn-up} CLK | Señal de reloj a 50 MHz \\
+\icon{clock} \icon{s-turn-up} ENABLE | Entrada síncrona a nivel alto \\
+\icon{clock-off} \icon{s-turn-down} RSTn | Reset asíncrono a nivel bajo \\
+\subsection{Salidas}
+\icon{matrix} LEDG [7:0] | Señal de activación de los LEDs
+\subsection{Instancias}
+\subsubsection{Contador}
+Módulo = $12.5 \cdot 10^6$ (cuenta hasta $50 \cdot 10^6$ en $1s$, por lo que para obtener $0.25s$, dividimos entre 4)\\
+UP = 1
+\subsubsection{Registro}
+ENABLE = TC \\
+SHIFT-IN = !SHIFT-OUT
+\subsection{Notas sobre el código}
+\textbf{Always} at * \\
+Asignamos un valor de led-pattern a todos los casos posibles de OUT-P \\
+
+\begin{flushleft}
+\textbf{Assign} \\
+Directamente asignamos OUT-P = led-pattern
+\end{flushleft}
+\newpage
+\section{Pruebas: Juego de luces}
+En la prueba, he incluido un funcionamiento general, y el Caso extremo 2 del contador (apagar ENABLE cuando TC = 1)
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{luces_rtl.png} 
+    \caption{Simulación RTL.}
+\end{figure}
+\end{document}
